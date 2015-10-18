@@ -1,0 +1,41 @@
+{
+	"author": {
+		"email": "giovanni.calo@live.it",
+		"name": "Giovanni Calò",
+		"url": "https://github.com/giovannicalo"
+	},
+	"bugs": {
+		"url": "https://github.com/giovannicalo/falcor-react/issues"
+	},
+	"dependencies": {
+		"babel": "^5.8.23",
+		"babel-loader": "^5.3.2",
+		"babel-runtime": "^5.8.25",
+		"react": "^0.14.0",
+		"webpack": "^1.12.2"
+	},
+	"description": "",
+	"devDependencies": {
+		"babel-eslint": "^4.1.3",
+		"chai": "^3.3.0",
+		"eslint": "^1.7.1",
+		"eslint-plugin-react": "^3.5.1",
+		"mocha": "^2.3.3"
+	},
+	"homepage": "https://github.com/giovannicalo/falcor-react",
+	"keywords": [],
+	"license": "MIT",
+	"main": "dist/index.js",
+	"name": "falcor-react",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/giovannicalo/falcor-react.git"
+	},
+	"scripts": {
+		"install": "webpack",
+		"lint": "eslint .",
+		"start": "webpack",
+		"test": "webpack && mocha --compilers js:babel/register --recursive"
+	},
+	"version": "0.0.0"
+}
