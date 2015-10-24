@@ -1,4 +1,5 @@
 {
+	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
 	"editor.insertSpaces": false,
 	"eslint.enable": true,
