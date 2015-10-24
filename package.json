@@ -8,12 +8,10 @@
 		"url": "https://github.com/giovannicalo/falcor-react/issues"
 	},
 	"dependencies": {
-		"babel": "^5.8.23",
-		"babel-loader": "^5.3.2",
-		"babel-runtime": "^5.8.25",
+		"babel": "^5.8.29",
+		"babel-runtime": "^5.8.29",
 		"falcor": "^0.1.13",
-		"react": "^0.14.0",
-		"webpack": "^1.12.2"
+		"react": "^0.14.0"
 	},
 	"description": "",
 	"devDependencies": {
@@ -23,7 +21,7 @@
 		"eslint": "^1.7.3",
 		"eslint-plugin-react": "^3.6.3",
 		"isparta": "^3.1.0",
-		"jsdom": "^7.0.1",
+		"jsdom": "^7.0.2",
 		"mocha": "^2.3.3",
 		"react-addons-test-utils": "^0.14.0"
 	},
@@ -38,9 +36,8 @@
 	},
 	"scripts": {
 		"coverage": "babel-node node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel/register --recursive && cat coverage/lcov.info | node node_modules/coveralls/bin/coveralls.js && rm -rf coverage",
-		"install": "webpack",
+		"install": "babel source --out-dir dist",
 		"lint": "eslint .",
-		"start": "webpack",
 		"test": "mocha --compilers js:babel/register --recursive"
 	},
 	"version": "0.0.0"
