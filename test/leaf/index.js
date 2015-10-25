@@ -1,6 +1,6 @@
 import React from "react";
 
-import FalcorReact from "../source";
+import FalcorReact from "../../source";
 
 @FalcorReact.Leaf(() => {
 	return [["foo", "bar"]];
