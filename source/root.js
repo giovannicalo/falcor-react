@@ -20,7 +20,7 @@ export default function(config) {
 			}
 
 			render() {
-				return <Component />;
+				return <Component {...this.props} />;
 			}
 
 		};
