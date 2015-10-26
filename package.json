@@ -23,7 +23,9 @@
 		"isparta": "^3.1.0",
 		"jsdom": "^7.0.2",
 		"mocha": "^2.3.3",
-		"react-addons-test-utils": "^0.14.0"
+		"posix-cat": "^1.1.1",
+		"react-addons-test-utils": "^0.14.0",
+		"rimraf": "^2.4.3"
 	},
 	"homepage": "https://github.com/giovannicalo/falcor-react",
 	"keywords": [],
@@ -35,7 +37,7 @@
 		"url": "https://github.com/giovannicalo/falcor-react.git"
 	},
 	"scripts": {
-		"coverage": "babel-node node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel/register --recursive && cat coverage/lcov.info | node node_modules/coveralls/bin/coveralls.js && rm -rf coverage",
+		"coverage": "babel-node node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel/register --recursive && cat coverage/lcov.info | node node_modules/coveralls/bin/coveralls.js && rimraf coverage",
 		"install": "babel source --out-dir dist",
 		"lint": "eslint .",
 		"test": "mocha --compilers js:babel/register --recursive"
