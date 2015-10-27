@@ -1,3 +1,4 @@
+import Falcor from "falcor";
 import React from "react";
 
 import FalcorReact from "../source";
@@ -7,7 +8,23 @@ import LeafUnsafe from "./leaf/unsafe";
 import LeafWithProps from "./leaf/with-props";
 
 @FalcorReact.Root(() => {
-	return { cache: { foo: { bar: "foo", foo: "bar" } } };
+	return {
+		cache: {
+			bar: {
+				1: { bar: "foo", foo: "bar" },
+				2: { bar: "foo", foo: "bar" },
+				3: { bar: "foo", foo: "bar" }
+			},
+			foo: {
+				bar: {
+					0: Falcor.Model.ref(["bar", 1]),
+					1: Falcor.Model.ref(["bar", 2]),
+					2: Falcor.Model.ref(["bar", 3])
+				},
+				foo: "bar"
+			}
+		}
+	};
 })
 export default class Root extends React.Component {
 

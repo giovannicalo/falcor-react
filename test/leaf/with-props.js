@@ -3,7 +3,7 @@ import React from "react";
 import FalcorReact from "../../source";
 
 @FalcorReact.Leaf((props) => {
-	return [["foo", props.foo]];
+	return [["foo", "bar", 0, props.foo]];
 })
 export default class LeafWithProps extends React.Component {
 

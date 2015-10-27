@@ -22,7 +22,7 @@ describe("Falcor", () => {
 		it("should initialize a component with data retrieved from a model", (done) => {
 			setTimeout(() => {
 				try {
-					expect(FindLeaf(tree, "Leaf").props.data.foo.bar).to.equal("foo");
+					expect(FindLeaf(tree, "Leaf").props.data.foo.bar[0].foo).to.equal("bar");
 					done();
 				} catch (error) {
 					done(error);
@@ -32,7 +32,7 @@ describe("Falcor", () => {
 		it("should initialize a component with data retrieved from a model and collapsed on a single property", (done) => {
 			setTimeout(() => {
 				try {
-					expect(FindLeaf(tree, "LeafSafe").props.falcor.data.foo.bar).to.equal("foo");
+					expect(FindLeaf(tree, "LeafSafe").props.falcor.data.foo.bar[0].foo).to.equal("bar");
 					done();
 				} catch (error) {
 					done(error);
@@ -42,7 +42,7 @@ describe("Falcor", () => {
 		it("should initialize a component with data retrieved from a model and spread on its properties", (done) => {
 			setTimeout(() => {
 				try {
-					expect(FindLeaf(tree, "LeafUnsafe").props.foo.bar).to.equal("foo");
+					expect(FindLeaf(tree, "LeafUnsafe").props.foo.bar[0].foo).to.equal("bar");
 					done();
 				} catch (error) {
 					done(error);
@@ -53,7 +53,7 @@ describe("Falcor", () => {
 			await FindLeaf(tree, "Root").setState({ foo: "foo" });
 			setTimeout(() => {
 				try {
-					expect(FindLeaf(tree, "LeafWithProps").props.data.foo.foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafWithProps").props.data.foo.bar[0].foo).to.equal("bar");
 					done();
 				} catch (error) {
 					done(error);
