@@ -3,6 +3,7 @@ import React from "react";
 
 import FalcorReact from "../source";
 import Leaf from "./leaf";
+import LeafDefinedEmpty from "./leaf/defined-empty";
 import LeafSafe from "./leaf/safe";
 import LeafUnsafe from "./leaf/unsafe";
 import LeafWithProps from "./leaf/with-props";
@@ -36,6 +37,7 @@ export default class Root extends React.Component {
 	render() {
 		return <div>
 			<Leaf />
+			<LeafDefinedEmpty />
 			<LeafSafe />
 			<LeafUnsafe />
 			<LeafWithProps foo={this.state.foo} />
