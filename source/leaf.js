@@ -28,20 +28,12 @@ export default function(query, config) {
 				this.initialize(props);
 			}
 
-			async call(functionPath, args, refSuffixes, thisPaths) {
-				try {
-					return await this.context.model.call(functionPath, args, refSuffixes, thisPaths);
-				} catch (error) {
-					console.log(error);
-				}
+			call(functionPath, args, refSuffixes, thisPaths) {
+				return this.context.model.call(functionPath, args, refSuffixes, thisPaths);
 			}
 
-			async get(...pathSets) {
-				try {
-					return await this.context.model.get(...pathSets);
-				} catch (error) {
-					console.log(error);
-				}
+			get(...pathSets) {
+				return this.context.model.get(...pathSets);
 			}
 
 			getChildProps() {
@@ -72,7 +64,7 @@ export default function(query, config) {
 				try {
 					let state = null;
 					if (config.defineEmpty) {
-						state = new Tree(query(props));
+						state = Tree(query(props));
 					}
 					const data = await this.get(...query(props));
 					if (data && data.json) {
@@ -90,12 +82,8 @@ export default function(query, config) {
 				return <Component {...this.props} {...this.getChildProps()} />;
 			}
 
-			async set(...pathValues) {
-				try {
-					return await this.context.model.set(...pathValues);
-				} catch (error) {
-					console.log(error);
-				}
+			set(...pathValues) {
+				return this.context.model.set(...pathValues);
 			}
 
 		};

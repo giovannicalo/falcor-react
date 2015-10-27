@@ -115,7 +115,7 @@ describe("Falcor", () => {
 	});
 	describe("Tree Builder", () => {
 		it("should convert paths to an empty tree", () => {
-			expect(new Tree([
+			expect(Tree([
 				["bar", "foo", 1, ["bar", "foo"]],
 				["bar", "foo", { length: 5 }, "bar"],
 				["foo", "bar", 1, "foo"],
@@ -144,7 +144,7 @@ describe("Falcor", () => {
 		});
 		it("should throw an error upon receiving an invalid range object", () => {
 			expect(() => {
-				new Tree([["foo", { bar: "foo" }, "bar"]]); // eslint-disable-line no-new
+				Tree([["foo", { bar: "foo" }, "bar"]]);
 			}).to.throw(Error, "Range object {\"bar\":\"foo\"} is invalid");
 		});
 	});
