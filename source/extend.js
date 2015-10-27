@@ -1,7 +1,7 @@
 export default function extend(destination, ...sources) {
 	if (destination && destination.constructor === Object) {
 		sources.forEach((source) => {
-			Object.entries(source).forEach(([key, value]) => {
+			Object.entries(source || {}).forEach(([key, value]) => {
 				if (destination[key] && destination[key].constructor === Object && value.constructor === Object) {
 					extend(destination[key], value);
 				} else {
