@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function(query, config = { propsSafety: 1 }) {
+import Extend from "./extend";
+import Tree from "./tree";
+
+const defaultConfig = { defineEmpty: false, propsSafety: 1 };
+
+export default function(query, config) {
+	config = Extend(Object.assign({}, defaultConfig), config);
 	return function(component) {
 		const Component = component;
 		return class FalcorLeaf extends React.Component {
@@ -64,9 +70,16 @@ export default function(query, config = { propsSafety: 1 }) {
 
 			async initialize(props = this.props) {
 				try {
+					let state = null;
+					if (config.defineEmpty) {
+						state = new Tree(query(props));
+					}
 					const data = await this.get(...query(props));
 					if (data && data.json) {
-						this.setState(data.json);
+						state = Extend(state, data.json);
+					}
+					if (state) {
+						this.setState(state);
 					}
 				} catch (error) {
 					console.log(error);
