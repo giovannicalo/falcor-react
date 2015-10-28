@@ -1,3 +1,5 @@
+import FalcorGraphSyntax from "falcor-graph-syntax";
+import FalcorPathSyntax from "falcor-path-syntax";
 import React from "react";
 
 import Extend from "./extend";
@@ -14,6 +16,46 @@ export default function(query, config) {
 			constructor(props) {
 				super(props);
 				this.state = {};
+			}
+
+			buildQuery(props) {
+				let pathSets = [];
+				if (typeof query === "function") {
+					pathSets = query(props);
+				} else if (typeof query === "string" || Array.isArray(query)) {
+					pathSets = query;
+				}
+				if (typeof pathSets === "string") {
+					try {
+						pathSets = FalcorGraphSyntax(pathSets);
+					} catch (error) {
+						pathSets = [FalcorPathSyntax.fromPath(pathSets)];
+					}
+				} else if (Array.isArray(pathSets)) {
+					if (!Array.isArray(pathSets[0])) {
+						pathSets = [pathSets];
+					}
+					let isPath = false;
+					pathSets = pathSets.map((pathSet) => {
+						return pathSet.map((path) => {
+							if (typeof path === "string") {
+								const arrayPath = FalcorPathSyntax.fromPath(path);
+								if (arrayPath[0] === path) {
+									return path;
+								} else {
+									isPath = true;
+									return arrayPath;
+								}
+							} else {
+								return path;
+							}
+						});
+					});
+					if (isPath) {
+						pathSets = pathSets[0];
+					}
+				}
+				return pathSets;
 			}
 
 			static contextTypes = {
@@ -39,10 +81,10 @@ export default function(query, config) {
 			getChildProps() {
 				const props = {
 					falcor: {
-						call: this.call,
+						call: ::this.call,
 						data: this.state,
-						get: this.get,
-						set: this.set
+						get: ::this.get,
+						set: ::this.set
 					}
 				};
 				if (config.propsSafety < 2) {
@@ -62,16 +104,19 @@ export default function(query, config) {
 
 			async initialize(props = this.props) {
 				try {
-					let state = null;
-					if (config.defineEmpty) {
-						state = Tree(query(props));
-					}
-					const data = await this.get(...query(props));
-					if (data && data.json) {
-						state = Extend(state, data.json);
-					}
-					if (state) {
-						this.setState(state);
+					const pathSets = this.buildQuery(props);
+					if (pathSets) {
+						let state = null;
+						if (config.defineEmpty) {
+							state = Tree(pathSets);
+						}
+						const data = await this.get(...pathSets);
+						if (data && data.json) {
+							state = Extend(state, data.json);
+						}
+						if (state) {
+							this.setState(state);
+						}
 					}
 				} catch (error) {
 					console.log(error);
