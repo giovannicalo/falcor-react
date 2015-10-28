@@ -11,6 +11,8 @@
 		"babel": "^5.8.29",
 		"babel-runtime": "^5.8.29",
 		"falcor": "^0.1.13",
+		"falcor-graph-syntax": "^1.0.2",
+		"falcor-path-syntax": "^0.2.3",
 		"react": "^0.14.0"
 	},
 	"description": "",
