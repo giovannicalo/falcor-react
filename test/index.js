@@ -112,6 +112,19 @@ describe("Falcor", () => {
 				}
 			});
 		});
+		it("should perform a set on the model", (done) => {
+			setTimeout(() => {
+				try {
+					ReactTestUtils.Simulate.click(FindLeaf(tree, "LeafSet").refs.foo);
+					setTimeout(() => {
+						expect(FindLeaf(tree, "LeafSet").state.foo).to.equal("foo");
+						done();
+					});
+				} catch (error) {
+					done(error);
+				}
+			});
+		});
 	});
 	describe("Tree Builder", () => {
 		it("should convert paths to an empty tree", () => {
