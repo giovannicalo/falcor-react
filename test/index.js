@@ -123,6 +123,19 @@ describe("Falcor", () => {
 				}
 			});
 		});
+		it("should perform a get on the model", (done) => {
+			setTimeout(() => {
+				try {
+					ReactTestUtils.Simulate.click(FindLeaf(tree, "LeafGet").refs.foo);
+					setTimeout(() => {
+						expect(FindLeaf(tree, "LeafGet").state.foo).to.equal("bar");
+						done();
+					});
+				} catch (error) {
+					done(error);
+				}
+			});
+		});
 		it("should perform a set on the model", (done) => {
 			setTimeout(() => {
 				try {
