@@ -4,6 +4,7 @@ import React from "react";
 import FalcorReact from "../source";
 import Leaf from "./leaf";
 import LeafDefinedEmpty from "./leaf/defined-empty";
+import LeafNested from "./leaf/nested";
 import LeafSafe from "./leaf/safe";
 import LeafSet from "./leaf/set";
 import LeafUnsafe from "./leaf/unsafe";
@@ -39,6 +40,7 @@ export default class Root extends React.Component {
 		return <div>
 			<Leaf />
 			<LeafDefinedEmpty />
+			<LeafNested />
 			<LeafSafe />
 			<LeafSet />
 			<LeafUnsafe />

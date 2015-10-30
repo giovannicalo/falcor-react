@@ -101,6 +101,17 @@ describe("Falcor", () => {
 				}
 			});
 		});
+		it("should initialize a component with data retrieved from a model through multiple nested queries", (done) => {
+			setTimeout(() => {
+				try {
+					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[0].foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[1].bar).to.equal("foo");
+					done();
+				} catch (error) {
+					done(error);
+				}
+			});
+		});
 		it("should reinitialize a component with data retrieved from a model after receiving new properties", async(done) => {
 			await FindLeaf(tree, "Root").setState({ foo: "foo" });
 			setTimeout(() => {
