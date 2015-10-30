@@ -8,7 +8,7 @@ import Tree from "./tree";
 const defaultConfig = { defineEmpty: false, propsSafety: 1 };
 
 export default function(query, config) {
-	config = Extend(Object.assign({}, defaultConfig), config);
+	config = Extend({}, defaultConfig, config);
 	return function(component) {
 		const Component = component;
 		return class FalcorLeaf extends React.Component {
@@ -58,6 +58,30 @@ export default function(query, config) {
 				return pathSets;
 			}
 
+			get childProps() {
+				const props = {
+					falcor: {
+						call: ::this.call,
+						data: Extend({}, this.parentProps, this.state),
+						get: ::this.get,
+						set: ::this.set
+					}
+				};
+				if (config.propsSafety < 2) {
+					Object.entries(props.falcor).map(([key, value]) => {
+						props[key] = value;
+					});
+					delete props.falcor;
+					if (config.propsSafety < 1) {
+						delete props.data;
+						Object.entries(this.state).map(([key, value]) => {
+							props[key] = value;
+						});
+					}
+				}
+				return props;
+			}
+
 			static contextTypes = {
 				model: React.PropTypes.object.isRequired
 			};
@@ -76,30 +100,6 @@ export default function(query, config) {
 
 			get(...pathSets) {
 				return this.context.model.get(...pathSets);
-			}
-
-			getChildProps() {
-				const props = {
-					falcor: {
-						call: ::this.call,
-						data: this.state,
-						get: ::this.get,
-						set: ::this.set
-					}
-				};
-				if (config.propsSafety < 2) {
-					Object.entries(props.falcor).map(([key, value]) => {
-						props[key] = value;
-					});
-					delete props.falcor;
-					if (config.propsSafety < 1) {
-						delete props.data;
-						Object.entries(this.state).map(([key, value]) => {
-							props[key] = value;
-						});
-					}
-				}
-				return props;
 			}
 
 			async initialize(props = this.props) {
@@ -123,8 +123,25 @@ export default function(query, config) {
 				}
 			}
 
+			get parentProps() {
+				if (this.props.parentConfig) {
+					switch (this.props.parentConfig.propsSafety) {
+						case 0:
+							return this.props.falcor.data;
+						case 1:
+							return this.props.data;
+						case 2:
+							return this.props;
+						default:
+							throw new Error("Parent's property safety setting (" + this.props.parentConfig.propsSafety + ") is invalid");
+					}
+				} else {
+					return {};
+				}
+			}
+
 			render() {
-				return <Component {...this.props} {...this.getChildProps()} />;
+				return <Component {...this.props} {...this.childProps} parentConfig={config} />;
 			}
 
 			set(...pathValues) {
