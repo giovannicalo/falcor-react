@@ -127,13 +127,12 @@ export default function(query, config) {
 				if (this.props.parentConfig) {
 					switch (this.props.parentConfig.propsSafety) {
 						case 0:
-							return this.props.falcor.data;
+							return this.props;
 						case 1:
 							return this.props.data;
 						case 2:
-							return this.props;
 						default:
-							throw new Error("Parent's property safety setting (" + this.props.parentConfig.propsSafety + ") is invalid");
+							return this.props.falcor.data;
 					}
 				} else {
 					return {};

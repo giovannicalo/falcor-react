@@ -106,6 +106,10 @@ describe("Falcor", () => {
 				try {
 					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[0].foo).to.equal("bar");
 					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[1].bar).to.equal("foo");
+					expect(FindLeaf(tree, "LeafNestedSafe").props.falcor.data.foo.bar[0].foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafNestedSafe").props.falcor.data.foo.bar[1].bar).to.equal("foo");
+					expect(FindLeaf(tree, "LeafNestedUnsafe").props.foo.bar[0].foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafNestedUnsafe").props.foo.bar[1].bar).to.equal("foo");
 					done();
 				} catch (error) {
 					done(error);

@@ -6,6 +6,8 @@ import Leaf from "./leaf";
 import LeafDefinedEmpty from "./leaf/defined-empty";
 import LeafGet from "./leaf/get";
 import LeafNested from "./leaf/nested";
+import LeafNestedSafe from "./leaf/nested/safe";
+import LeafNestedUnsafe from "./leaf/nested/unsafe";
 import LeafSafe from "./leaf/safe";
 import LeafSet from "./leaf/set";
 import LeafUnsafe from "./leaf/unsafe";
@@ -43,6 +45,8 @@ export default class Root extends React.Component {
 			<LeafDefinedEmpty />
 			<LeafGet />
 			<LeafNested />
+			<LeafNestedSafe />
+			<LeafNestedUnsafe />
 			<LeafSafe />
 			<LeafSet />
 			<LeafUnsafe />
