@@ -91,25 +91,43 @@ describe("Falcor", () => {
 				}
 			});
 		});
-		it("should initialize a component with data retrieved from a model and retrieve even undefined variables", (done) => {
+		it("should initialize a component with data retrieved from a model through multiple nested queries", (done) => {
 			setTimeout(() => {
 				try {
-					expect(FindLeaf(tree, "LeafDefinedEmpty").props.data.foo.bar[3].foo).to.equal(null);
+					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[0].foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[1].bar).to.equal("foo");
 					done();
 				} catch (error) {
 					done(error);
 				}
 			});
 		});
-		it("should initialize a component with data retrieved from a model through multiple nested queries", (done) => {
+		it("should initialize a component with data retrieved from a model through multiple nested queries and collapsed on a single property", (done) => {
 			setTimeout(() => {
 				try {
-					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[0].foo).to.equal("bar");
-					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[1].bar).to.equal("foo");
-					expect(FindLeaf(tree, "LeafNestedSafe").props.falcor.data.foo.bar[0].foo).to.equal("bar");
-					expect(FindLeaf(tree, "LeafNestedSafe").props.falcor.data.foo.bar[1].bar).to.equal("foo");
-					expect(FindLeaf(tree, "LeafNestedUnsafe").props.foo.bar[0].foo).to.equal("bar");
-					expect(FindLeaf(tree, "LeafNestedUnsafe").props.foo.bar[1].bar).to.equal("foo");
+					expect(FindLeaf(tree, "LeafNestedSafe").props.data.foo.bar[0].foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafNestedSafe").props.data.foo.bar[1].bar).to.equal("foo");
+					done();
+				} catch (error) {
+					done(error);
+				}
+			});
+		});
+		it("should initialize a component with data retrieved from a model through multiple nested queries and spread on its properties", (done) => {
+			setTimeout(() => {
+				try {
+					expect(FindLeaf(tree, "LeafNestedUnsafe").props.data.foo.bar[0].foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafNestedUnsafe").props.data.foo.bar[1].bar).to.equal("foo");
+					done();
+				} catch (error) {
+					done(error);
+				}
+			});
+		});
+		it("should initialize a component with data retrieved from a model and retrieve even undefined variables", (done) => {
+			setTimeout(() => {
+				try {
+					expect(FindLeaf(tree, "LeafDefinedEmpty").props.data.foo.bar[3].foo).to.equal(null);
 					done();
 				} catch (error) {
 					done(error);
