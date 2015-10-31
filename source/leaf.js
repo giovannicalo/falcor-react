@@ -59,22 +59,23 @@ export default function(query, config) {
 			}
 
 			get childProps() {
-				const props = {
+				const props = Extend({}, this.parentProps, {
 					falcor: {
 						call: ::this.call,
-						data: Extend({}, this.parentProps, this.state),
+						config,
+						data: this.state,
 						get: ::this.get,
 						set: ::this.set
 					}
-				};
+				});
 				if (config.propsSafety < 2) {
-					Object.entries(props.falcor).map(([key, value]) => {
-						props[key] = value;
+					["call", "data", "get", "set"].forEach((key) => {
+						props[key] = props.falcor[key];
+						delete props.falcor[key];
 					});
-					delete props.falcor;
 					if (config.propsSafety < 1) {
 						delete props.data;
-						Object.entries(this.state).map(([key, value]) => {
+						Object.entries(this.state).forEach(([key, value]) => {
 							props[key] = value;
 						});
 					}
@@ -123,24 +124,33 @@ export default function(query, config) {
 				}
 			}
 
+			get parentConfig() {
+				return this.props.falcor && this.props.falcor.config;
+			}
+
 			get parentProps() {
-				if (this.props.parentConfig) {
-					switch (this.props.parentConfig.propsSafety) {
-						case 0:
-							return this.props;
-						case 1:
-							return this.props.data;
-						case 2:
-						default:
-							return this.props.falcor.data;
+				const props = Extend({}, this.props);
+				if (this.parentConfig) {
+					let object = null;
+					if (this.parentConfig.propsSafety > 1) {
+						object = props.falcor;
+					} else {
+						object = props;
+						if (this.parentConfig.propsSafety === 1) {
+							props.falcor.data = props.data;
+						} else {
+							props.falcor.data = props;
+						}
 					}
-				} else {
-					return {};
+					["call", "get", "set"].forEach((key) => {
+						object && delete object[key];
+					});
 				}
+				return props;
 			}
 
 			render() {
-				return <Component {...this.props} {...this.childProps} parentConfig={config} />;
+				return <Component {...this.childProps} />;
 			}
 
 			set(...pathValues) {
