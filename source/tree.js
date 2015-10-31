@@ -18,19 +18,19 @@ const expand = (range) => {
 };
 
 const build = (path) => {
-	let object = null;
+	const object = {};
 	if (path.length) {
-		object = {};
 		let keys = path.shift();
 		if (!Array.isArray(keys)) {
-			if (keys.constructor === Object) {
+			if (keys && typeof keys === "object") {
 				keys = expand(keys);
 			} else {
 				keys = [keys];
 			}
 		}
 		keys.forEach((key) => {
-			object[key] = Extend(object[key], build(Array.from(path)));
+			const value = Extend({}, build(Array.from(path)))
+			object[key] = Object.keys(value).length ? value : null;
 		});
 	}
 	return object;

@@ -48,13 +48,13 @@ describe("Extend", () => {
 		});
 	});
 	it("should extend an empty object if the destination is not an object", () => {
-		expect(Extend("foo", null)).to.equal(null);
-		expect(Extend(null, "bar")).to.equal("bar");
+		expect(Extend(null)).to.deep.equal({});
+		expect(Extend("foo")).to.deep.equal({});
+		expect(Extend("foo", null)).to.deep.equal({});
+		expect(Extend(null, "bar")).to.deep.equal({});
 		expect(Extend(null, { bar: "foo" })).to.deep.equal({ bar: "foo" });
 	});
 	it("should return the destination object if no source is provided", () => {
-		expect(Extend(null)).to.equal(null);
-		expect(Extend("foo")).to.equal("foo");
 		expect(Extend({ foo: "bar" })).to.deep.equal({ foo: "bar" });
 	});
 });

@@ -3,13 +3,15 @@ export default function extend(destination, ...sources) {
 		destination = {};
 	}
 	sources.forEach((source) => {
-		Object.entries(source || {}).forEach(([key, value]) => {
-			if (destination[key] && destination[key].constructor === Object && value.constructor === Object) {
-				extend(destination[key], value);
-			} else {
-				destination[key] = value;
-			}
-		});
+		if (source && typeof source === "object") {
+			Object.entries(source).forEach(([key, value]) => {
+				if (destination[key] && typeof destination[key] === "object" && value && typeof value === "object") {
+					extend(destination[key], extend({}, value));
+				} else {
+					destination[key] = value;
+				}
+			});
+		}
 	});
 	return destination;
 }
