@@ -29,7 +29,7 @@ const build = (path) => {
 			}
 		}
 		keys.forEach((key) => {
-			const value = Extend({}, build(Array.from(path)))
+			const value = Extend({}, build(Array.from(path)));
 			object[key] = Object.keys(value).length ? value : null;
 		});
 	}
