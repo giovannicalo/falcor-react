@@ -20,7 +20,7 @@ global.window = global.document.defaultView;
 const tree = ReactTestUtils.renderIntoDocument(<Root />);
 
 describe("Extend", () => {
-	it("should extend a destination object given a source one", () => {
+	it("should extend a destination object given a source", () => {
 		expect(Extend({
 			bar: "foo",
 			foo: { bar: "foo" }
@@ -32,7 +32,7 @@ describe("Extend", () => {
 			foo: { bar: "foo", foo: "bar" }
 		});
 	});
-	it("should extend a destination object given multiple source ones", () => {
+	it("should extend a destination object given multiple sources", () => {
 		expect(Extend({
 			bar: "foo",
 			foo: { bar: "foo" }
@@ -47,12 +47,12 @@ describe("Extend", () => {
 			foo: { bar: { foo: "bar" }, foo: "bar" }
 		});
 	});
-	it("should return the last source object if the destination one is not an object", () => {
+	it("should extend an empty object if the destination is not an object", () => {
 		expect(Extend("foo", null)).to.equal(null);
 		expect(Extend(null, "bar")).to.equal("bar");
 		expect(Extend(null, { bar: "foo" })).to.deep.equal({ bar: "foo" });
 	});
-	it("should return the destination object if no source one is provided", () => {
+	it("should return the destination object if no source is provided", () => {
 		expect(Extend(null)).to.equal(null);
 		expect(Extend("foo")).to.equal("foo");
 		expect(Extend({ foo: "bar" })).to.deep.equal({ foo: "bar" });
