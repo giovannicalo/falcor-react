@@ -1,8 +1,9 @@
-import Falcor from "falcor";
 import React from "react";
 
+import DataSource from "./data-source";
 import FalcorReact from "../source";
 import Leaf from "./leaf";
+import LeafCall from "./leaf/call";
 import LeafDefinedEmpty from "./leaf/defined-empty";
 import LeafGet from "./leaf/get";
 import LeafNested from "./leaf/nested";
@@ -13,23 +14,7 @@ import LeafSet from "./leaf/set";
 import LeafUnsafe from "./leaf/unsafe";
 import LeafWithProps from "./leaf/with-props";
 
-@FalcorReact.Root({
-	cache: {
-		bar: {
-			1: { bar: "foo", foo: "bar" },
-			2: { bar: "foo", foo: "bar" },
-			3: { bar: "foo", foo: "bar" }
-		},
-		foo: {
-			bar: {
-				0: Falcor.Model.ref(["bar", 1]),
-				1: Falcor.Model.ref(["bar", 2]),
-				2: Falcor.Model.ref(["bar", 3])
-			},
-			foo: "bar"
-		}
-	}
-})
+@FalcorReact.Root({ source: new DataSource() })
 export default class Root extends React.Component {
 
 	constructor(props) {
@@ -40,6 +25,7 @@ export default class Root extends React.Component {
 	render() {
 		return <div>
 			<Leaf />
+			<LeafCall />
 			<LeafDefinedEmpty />
 			<LeafGet />
 			<LeafNested />
