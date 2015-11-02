@@ -58,6 +58,10 @@ export default function(query, config) {
 				return pathSets;
 			}
 
+			call(functionPath, args, refSuffixes, thisPaths) {
+				return this.context.model.call(functionPath, args || [], refSuffixes || [], thisPaths || []);
+			}
+
 			get childProps() {
 				const props = Extend({}, this.parentProps, {
 					falcor: {
@@ -93,10 +97,6 @@ export default function(query, config) {
 
 			componentWillReceiveProps(props) {
 				this.initialize(props);
-			}
-
-			call(functionPath, args, refSuffixes, thisPaths) {
-				return this.context.model.call(functionPath, args, refSuffixes, thisPaths);
 			}
 
 			get(...pathSets) {
