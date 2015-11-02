@@ -8,7 +8,10 @@ export default function(config) {
 
 			constructor(props) {
 				super(props);
-				this.state = { model: new Falcor.Model(config()) };
+				if (typeof config === "function") {
+					config = config();
+				}
+				this.state = { model: new Falcor.Model(config) };
 			}
 
 			static childContextTypes = {

@@ -13,24 +13,22 @@ import LeafSet from "./leaf/set";
 import LeafUnsafe from "./leaf/unsafe";
 import LeafWithProps from "./leaf/with-props";
 
-@FalcorReact.Root(() => {
-	return {
-		cache: {
+@FalcorReact.Root({
+	cache: {
+		bar: {
+			1: { bar: "foo", foo: "bar" },
+			2: { bar: "foo", foo: "bar" },
+			3: { bar: "foo", foo: "bar" }
+		},
+		foo: {
 			bar: {
-				1: { bar: "foo", foo: "bar" },
-				2: { bar: "foo", foo: "bar" },
-				3: { bar: "foo", foo: "bar" }
+				0: Falcor.Model.ref(["bar", 1]),
+				1: Falcor.Model.ref(["bar", 2]),
+				2: Falcor.Model.ref(["bar", 3])
 			},
-			foo: {
-				bar: {
-					0: Falcor.Model.ref(["bar", 1]),
-					1: Falcor.Model.ref(["bar", 2]),
-					2: Falcor.Model.ref(["bar", 3])
-				},
-				foo: "bar"
-			}
+			foo: "bar"
 		}
-	};
+	}
 })
 export default class Root extends React.Component {
 
