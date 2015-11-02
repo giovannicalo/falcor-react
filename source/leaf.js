@@ -19,7 +19,7 @@ export default function(query, config) {
 			}
 
 			buildQuery(props) {
-				let pathSets = [];
+				let pathSets = null;
 				if (typeof query === "function") {
 					pathSets = query(props);
 				} else if (typeof query === "string" || Array.isArray(query)) {
