@@ -22,12 +22,14 @@
 		"coveralls": "^2.11.4",
 		"eslint": "^1.8.0",
 		"eslint-plugin-react": "^3.6.3",
+		"falcor-router": "^0.2.11",
 		"isparta": "^3.5.0",
 		"jsdom": "^7.0.2",
 		"mocha": "^2.3.3",
 		"posix-cat": "^1.1.1",
 		"react-addons-test-utils": "^0.14.1",
-		"rimraf": "^2.4.3"
+		"rimraf": "^2.4.3",
+		"rx": "^4.0.6"
 	},
 	"homepage": "https://github.com/giovannicalo/falcor-react",
 	"keywords": [],
