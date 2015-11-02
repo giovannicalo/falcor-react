@@ -39,7 +39,7 @@ const build = (path) => {
 export default (paths) => {
 	const data = {};
 	paths.forEach((path) => {
-		Object.entries(build(path)).forEach(([key, value]) => {
+		Object.entries(build(Array.from(path))).forEach(([key, value]) => {
 			data[key] = Extend(data[key], value);
 		});
 	});
