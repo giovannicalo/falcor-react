@@ -17,7 +17,7 @@ export default class LeafGet extends React.Component {
 				this.setState({ foo: data.json.foo.bar[0].foo });
 			}
 		} catch (error) {
-			console.log(error);
+			throw new Error(error);
 		}
 	}
 

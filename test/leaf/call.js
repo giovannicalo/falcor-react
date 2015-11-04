@@ -17,7 +17,7 @@ export default class LeafCall extends React.Component {
 				this.setState({ foo: data.json.bar[4].foo });
 			}
 		} catch (error) {
-			console.log(error);
+			throw new Error(error);
 		}
 	}
 
