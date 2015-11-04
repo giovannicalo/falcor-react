@@ -13,7 +13,7 @@
 		"falcor": "^0.1.14",
 		"falcor-graph-syntax": "^1.0.3",
 		"falcor-path-syntax": "^0.2.4",
-		"react": "^0.14.1"
+		"react": "^0.14.2"
 	},
 	"description": "",
 	"devDependencies": {
@@ -23,11 +23,11 @@
 		"eslint": "^1.8.0",
 		"eslint-plugin-react": "^3.6.3",
 		"falcor-router": "^0.2.11",
-		"isparta": "^3.5.0",
+		"isparta": "^3.5.1",
 		"jsdom": "^7.0.2",
 		"mocha": "^2.3.3",
 		"posix-cat": "^1.1.1",
-		"react-addons-test-utils": "^0.14.1",
+		"react-addons-test-utils": "^0.14.2",
 		"rimraf": "^2.4.3",
 		"rx": "2.5.3"
 	},
