@@ -5,6 +5,7 @@ import Jsdom from "jsdom";
 import React from "react";
 import ReactTestUtils from "react-addons-test-utils";
 
+import ArraySyntax from "../source/array-syntax";
 import Extend from "../source/extend";
 import FindLeaf from "./find-leaf";
 import Root from "./root";
@@ -63,126 +64,56 @@ describe("Falcor", () => {
 	describe("React Integration", () => {
 		describe("Initialization Query", () => {
 			describe("Array Syntax and Property Safety", () => {
-				it("should initialize a component with data retrieved from a model", (done) => {
-					setTimeout(() => {
-						try {
-							expect(FindLeaf(tree, "Leaf").props.data.foo.bar[0].foo).to.equal("bar");
-							done();
-						} catch (error) {
-							done(error);
-						}
-					});
+				it("should initialize a component with data retrieved from a model", () => {
+					expect(FindLeaf(tree, "Leaf").props.data.foo.bar[0].foo).to.equal("bar");
 				});
-				it("should initialize a component with data retrieved from a model and collapsed on a single property", (done) => {
-					setTimeout(() => {
-						try {
-							expect(FindLeaf(tree, "LeafSafe").props.falcor.data.foo.bar[0].foo).to.equal("bar");
-							done();
-						} catch (error) {
-							done(error);
-						}
-					});
+				it("should initialize a component with data retrieved from a model and collapsed on a single property", () => {
+					expect(FindLeaf(tree, "LeafSafe").props.falcor.data.foo.bar[0].foo).to.equal("bar");
 				});
-				it("should initialize a component with data retrieved from a model and spread on its properties", (done) => {
-					setTimeout(() => {
-						try {
-							expect(FindLeaf(tree, "LeafUnsafe").props.foo.bar[0].foo).to.equal("bar");
-							done();
-						} catch (error) {
-							done(error);
-						}
-					});
+				it("should initialize a component with data retrieved from a model and spread on its properties", () => {
+					expect(FindLeaf(tree, "LeafUnsafe").props.foo.bar[0].foo).to.equal("bar");
 				});
 			});
 			describe("Graph Syntax", () => {
-				it("should initialize a component with data retrieved from a model using graph syntax", (done) => {
-					setTimeout(() => {
-						try {
-							expect(FindLeaf(tree, "LeafGraph").props.data.foo.bar[0].foo).to.equal("bar");
-							done();
-						} catch (error) {
-							done(error);
-						}
-					});
+				it("should initialize a component with data retrieved from a model using graph syntax", () => {
+					expect(FindLeaf(tree, "LeafGraph").props.data.foo.bar[0].foo).to.equal("bar");
 				});
 			});
 			describe("Path Syntax", () => {
-				it("should initialize a component with data retrieved from a model using path syntax", (done) => {
-					setTimeout(() => {
-						try {
-							expect(FindLeaf(tree, "LeafPath").props.data.foo.bar[0].foo).to.equal("bar");
-							done();
-						} catch (error) {
-							done(error);
-						}
-					});
+				it("should initialize a component with data retrieved from a model using path syntax", () => {
+					expect(FindLeaf(tree, "LeafPath").props.data.foo.bar[0].foo).to.equal("bar");
 				});
-				it("should initialize a component with data retrieved from a model using path syntax and multiple paths", (done) => {
-					setTimeout(() => {
-						try {
-							expect(FindLeaf(tree, "LeafPathArray").props.data.foo.bar[0].foo).to.equal("bar");
-							done();
-						} catch (error) {
-							done(error);
-						}
-					});
+				it("should initialize a component with data retrieved from a model using path syntax and multiple paths", () => {
+					expect(FindLeaf(tree, "LeafPathArray").props.data.foo.bar[0].foo).to.equal("bar");
 				});
 			});
 			describe("Nested", () => {
-				it("should initialize a component with data retrieved from a model through multiple nested queries", (done) => {
-					setTimeout(() => {
-						try {
-							expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[0].foo).to.equal("bar");
-							expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[1].bar).to.equal("foo");
-							done();
-						} catch (error) {
-							done(error);
-						}
-					});
+				it("should initialize a component with data retrieved from a model through multiple nested queries", () => {
+					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[0].foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafNested").props.data.foo.bar[1].bar).to.equal("foo");
 				});
-				it("should initialize a component with data retrieved from a model through multiple nested queries and collapsed on a single property", (done) => {
-					setTimeout(() => {
-						try {
-							expect(FindLeaf(tree, "LeafNestedSafe").props.data.foo.bar[0].foo).to.equal("bar");
-							expect(FindLeaf(tree, "LeafNestedSafe").props.data.foo.bar[1].bar).to.equal("foo");
-							done();
-						} catch (error) {
-							done(error);
-						}
-					});
+				it("should initialize a component with data retrieved from a model through multiple nested queries and collapsed on a single property", () => {
+					expect(FindLeaf(tree, "LeafNestedSafe").props.data.foo.bar[0].foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafNestedSafe").props.data.foo.bar[1].bar).to.equal("foo");
 				});
-				it("should initialize a component with data retrieved from a model through multiple nested queries and spread on its properties", (done) => {
-					setTimeout(() => {
-						try {
-							expect(FindLeaf(tree, "LeafNestedUnsafe").props.data.foo.bar[0].foo).to.equal("bar");
-							expect(FindLeaf(tree, "LeafNestedUnsafe").props.data.foo.bar[1].bar).to.equal("foo");
-							done();
-						} catch (error) {
-							done(error);
-						}
-					});
+				it("should initialize a component with data retrieved from a model through multiple nested queries and spread on its properties", () => {
+					expect(FindLeaf(tree, "LeafNestedUnsafe").props.data.foo.bar[0].foo).to.equal("bar");
+					expect(FindLeaf(tree, "LeafNestedUnsafe").props.data.foo.bar[1].bar).to.equal("foo");
 				});
 			});
-		});
-		describe("Defined Empty", () => {
-			it("should initialize a component with data retrieved from a model and retrieve even undefined variables", (done) => {
-				setTimeout(() => {
-					try {
-						expect(FindLeaf(tree, "LeafDefinedEmpty").props.data.foo.bar[3].foo).to.equal(null);
-						done();
-					} catch (error) {
-						done(error);
-					}
+			describe("Defined Empty", () => {
+				it("should initialize a component with data retrieved from a model and retrieve even undefined variables", () => {
+					expect(FindLeaf(tree, "LeafDefinedEmpty").props.data.foo.bar[3].foo).to.equal(null);
 				});
 			});
-		});
-		describe("Reinitialization", () => {
-			it("should reinitialize a component with data retrieved from a model after receiving new properties", async(done) => {
-				await FindLeaf(tree, "Root").setState({ foo: "foo" });
-				setTimeout(() => {
+			describe("Reinitialization", () => {
+				it("should reinitialize a component with data retrieved from a model after receiving new properties", async(done) => {
 					try {
-						expect(FindLeaf(tree, "LeafWithProps").props.data.foo.bar[0].foo).to.equal("bar");
-						done();
+						await FindLeaf(tree, "Root").setState({ foo: "foo" });
+						setTimeout(() => {
+							expect(FindLeaf(tree, "LeafWithProps").props.data.foo.bar[0].foo).to.equal("bar");
+							done();
+						});
 					} catch (error) {
 						done(error);
 					}
@@ -191,44 +122,43 @@ describe("Falcor", () => {
 		});
 		describe("Falcor methods", () => {
 			it("should perform a call on the model", (done) => {
-				setTimeout(() => {
-					try {
-						ReactTestUtils.Simulate.click(FindLeaf(tree, "LeafCall").refs.foo);
-						setTimeout(() => {
-							expect(FindLeaf(tree, "LeafCall").state.foo).to.equal("foo");
-							done();
-						});
-					} catch (error) {
-						done(error);
-					}
-				});
+				try {
+					ReactTestUtils.Simulate.click(FindLeaf(tree, "LeafCall").refs.foo);
+					setTimeout(() => {
+						expect(FindLeaf(tree, "LeafCall").state.foo).to.equal("foo");
+						done();
+					});
+				} catch (error) {
+					done(error);
+				}
 			});
 			it("should perform a get on the model", (done) => {
-				setTimeout(() => {
-					try {
-						ReactTestUtils.Simulate.click(FindLeaf(tree, "LeafGet").refs.foo);
-						setTimeout(() => {
-							expect(FindLeaf(tree, "LeafGet").state.foo).to.equal("bar");
-							done();
-						});
-					} catch (error) {
-						done(error);
-					}
-				});
+				try {
+					ReactTestUtils.Simulate.click(FindLeaf(tree, "LeafGet").refs.foo);
+					setTimeout(() => {
+						expect(FindLeaf(tree, "LeafGet").state.foo).to.equal("bar");
+						done();
+					});
+				} catch (error) {
+					done(error);
+				}
 			});
 			it("should perform a set on the model", (done) => {
-				setTimeout(() => {
-					try {
-						ReactTestUtils.Simulate.click(FindLeaf(tree, "LeafSet").refs.foo);
-						setTimeout(() => {
-							expect(FindLeaf(tree, "LeafSet").state.foo).to.equal("foo");
-							done();
-						});
-					} catch (error) {
-						done(error);
-					}
-				});
+				try {
+					ReactTestUtils.Simulate.click(FindLeaf(tree, "LeafSet").refs.foo);
+					setTimeout(() => {
+						expect(FindLeaf(tree, "LeafSet").state.foo).to.equal("foo");
+						done();
+					});
+				} catch (error) {
+					done(error);
+				}
 			});
+		});
+	});
+	describe("Array Syntax Converter", () => {
+		it("should return null when given an invalid input", () => {
+			expect(ArraySyntax(null)).to.equal(null);
 		});
 	});
 	describe("Tree Builder", () => {
