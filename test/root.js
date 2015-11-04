@@ -6,9 +6,12 @@ import Leaf from "./leaf";
 import LeafCall from "./leaf/call";
 import LeafDefinedEmpty from "./leaf/defined-empty";
 import LeafGet from "./leaf/get";
+import LeafGraph from "./leaf/graph";
 import LeafNested from "./leaf/nested";
 import LeafNestedSafe from "./leaf/nested/safe";
 import LeafNestedUnsafe from "./leaf/nested/unsafe";
+import LeafPath from "./leaf/path";
+import LeafPathArray from "./leaf/path/array";
 import LeafSafe from "./leaf/safe";
 import LeafSet from "./leaf/set";
 import LeafUnsafe from "./leaf/unsafe";
@@ -28,9 +31,12 @@ export default class Root extends React.Component {
 			<LeafCall />
 			<LeafDefinedEmpty />
 			<LeafGet />
+			<LeafGraph />
 			<LeafNested />
 			<LeafNestedSafe />
 			<LeafNestedUnsafe />
+			<LeafPath />
+			<LeafPathArray />
 			<LeafSafe />
 			<LeafSet />
 			<LeafUnsafe />
