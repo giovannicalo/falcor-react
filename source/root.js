@@ -8,9 +8,6 @@ export default function(config) {
 
 			constructor(props) {
 				super(props);
-				if (typeof config === "function") {
-					config = config();
-				}
 				this.state = { model: new Falcor.Model(config) };
 			}
 
