@@ -1,7 +1,6 @@
-import FalcorGraphSyntax from "falcor-graph-syntax";
-import FalcorPathSyntax from "falcor-path-syntax";
 import React from "react";
 
+import ArraySyntax from "./array-syntax";
 import Extend from "./extend";
 import Tree from "./tree";
 
@@ -19,43 +18,13 @@ export default function(query, config) {
 			}
 
 			buildQuery(props) {
-				let pathSets = null;
 				if (typeof query === "function") {
-					pathSets = query(props);
+					return ArraySyntax(query(props));
 				} else if (typeof query === "string" || Array.isArray(query)) {
-					pathSets = query;
+					return ArraySyntax(query);
+				} else {
+					return null;
 				}
-				if (typeof pathSets === "string") {
-					try {
-						pathSets = FalcorGraphSyntax(pathSets);
-					} catch (error) {
-						pathSets = [FalcorPathSyntax.fromPath(pathSets)];
-					}
-				} else if (Array.isArray(pathSets)) {
-					if (!Array.isArray(pathSets[0])) {
-						pathSets = [pathSets];
-					}
-					let isPath = false;
-					pathSets = pathSets.map((pathSet) => {
-						return pathSet.map((path) => {
-							if (typeof path === "string") {
-								const arrayPath = FalcorPathSyntax.fromPath(path);
-								if (arrayPath[0] === path) {
-									return path;
-								} else {
-									isPath = true;
-									return arrayPath;
-								}
-							} else {
-								return path;
-							}
-						});
-					});
-					if (isPath) {
-						pathSets = pathSets[0];
-					}
-				}
-				return pathSets;
 			}
 
 			call(functionPath, args, refSuffixes, thisPaths) {
