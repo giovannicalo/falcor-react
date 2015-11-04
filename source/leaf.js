@@ -38,11 +38,12 @@ export default function(query, config) {
 						config,
 						data: this.state,
 						get: ::this.get,
+						reinitialize: ::this.initialize,
 						set: ::this.set
 					}
 				});
 				if (config.propsSafety < 2) {
-					["call", "data", "get", "set"].forEach((key) => {
+					["call", "data", "get", "reinitialize", "set"].forEach((key) => {
 						props[key] = props.falcor[key];
 						delete props.falcor[key];
 					});
@@ -89,7 +90,7 @@ export default function(query, config) {
 						}
 					}
 				} catch (error) {
-					console.log(error);
+					throw new Error(error);
 				}
 			}
 
@@ -111,8 +112,10 @@ export default function(query, config) {
 							props.falcor.data = props;
 						}
 					}
-					["call", "get", "set"].forEach((key) => {
-						object && delete object[key];
+					["call", "get", "reinitialize", "set"].forEach((key) => {
+						if (object) {
+							delete object[key];
+						}
 					});
 				}
 				return props;

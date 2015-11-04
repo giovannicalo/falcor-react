@@ -1,6 +1,7 @@
 /* global describe, it */
 
 import Chai from "chai";
+import ChaiAsPromised from "chai-as-promised";
 import Jsdom from "jsdom";
 import React from "react";
 import ReactTestUtils from "react-addons-test-utils";
@@ -11,9 +12,10 @@ import FindLeaf from "./find-leaf";
 import Root from "./root";
 import Tree from "../source/tree";
 
-const expect = Chai.expect;
-
 Chai.config.showDiff = true;
+Chai.use(ChaiAsPromised);
+
+const expect = Chai.expect;
 
 global.document = Jsdom.jsdom();
 global.window = global.document.defaultView;
@@ -117,6 +119,11 @@ describe("Falcor", () => {
 					} catch (error) {
 						done(error);
 					}
+				});
+			});
+			describe("Error", () => {
+				it("should try to initialize a component with data retrieved from a model and throw an error", async() => {
+					return expect(FindLeaf(tree, "LeafError").props.reinitialize()).to.be.rejectedWith(Error, "Error: unquoted indexers must be numeric. -- foo[bar");
 				});
 			});
 		});

@@ -5,6 +5,7 @@ import FalcorReact from "../source";
 import Leaf from "./leaf";
 import LeafCall from "./leaf/call";
 import LeafDefinedEmpty from "./leaf/defined-empty";
+import LeafError from "./leaf/error";
 import LeafGet from "./leaf/get";
 import LeafGraph from "./leaf/graph";
 import LeafNested from "./leaf/nested";
@@ -30,6 +31,7 @@ export default class Root extends React.Component {
 			<Leaf />
 			<LeafCall />
 			<LeafDefinedEmpty />
+			<LeafError />
 			<LeafGet />
 			<LeafGraph />
 			<LeafNested />
