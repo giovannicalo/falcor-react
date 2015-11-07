@@ -69,6 +69,8 @@ export default function(query, config) {
 				this.initialize(props);
 			}
 
+			static displayName = "Falcor Leaf (" + (component.displayName || component.name || "Anonymous Component") + ")"
+
 			get(...pathSets) {
 				return this.context.model.get(...pathSets);
 			}

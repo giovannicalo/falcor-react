@@ -15,6 +15,8 @@ export default function(config) {
 				model: React.PropTypes.object.isRequired
 			};
 
+			static displayName = "Falcor Root (" + (component.displayName || component.name || "Anonymous Component") + ")"
+
 			getChildContext() {
 				return { model: this.state.model };
 			}
