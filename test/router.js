@@ -40,6 +40,9 @@ export default new FalcorRouter([{
 		return [{
 			path: ["bar", 4, "foo"],
 			value: parameters && parameters[0]
+		}, {
+			path: ["foo", "bar", 3],
+			value: Falcor.Model.ref(["bar", 4])
 		}];
 	},
 	route: "foo.foo"
