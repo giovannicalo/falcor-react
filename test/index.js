@@ -1,5 +1,3 @@
-/* global describe, it */
-
 import Chai from "chai";
 import ChaiAsPromised from "chai-as-promised";
 import Jsdom from "jsdom";
