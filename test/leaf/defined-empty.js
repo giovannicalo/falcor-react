@@ -9,10 +9,6 @@ import FalcorReact from "../../source";
 ], { defineEmpty: true })
 export default class LeafDefinedEmpty extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return <div />;
 	}

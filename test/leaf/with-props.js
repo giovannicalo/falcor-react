@@ -7,10 +7,6 @@ import FalcorReact from "../../source";
 })
 export default class LeafWithProps extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return <div />;
 	}

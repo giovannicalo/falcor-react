@@ -6,10 +6,6 @@ import FalcorReact from "../../../source";
 @FalcorReact.Leaf([["foo", "bar", 1, "bar"]])
 export default class LeafNestedUnsafe extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return <div />;
 	}
