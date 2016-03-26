@@ -1,6 +1,13 @@
 import FalcorGraphSyntax from "falcor-graph-syntax";
 import FalcorPathSyntax from "falcor-path-syntax";
 
+/**
+ * Normalizes a Falcor query to its array syntax
+ *
+ * @export
+ * @param {Array|String} query - A Falcor query in its array, graph or path syntax
+ * @returns {Array} The normalized query
+ */
 export default (query) => {
 	let pathSets = query;
 	if (typeof query === "string") {
