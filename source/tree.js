@@ -1,45 +1,71 @@
 import Extend from "./extend";
 
+/**
+ * Expands a Falcor range object to its equivalent array of keys
+ *
+ * @param {Object} range - A Falcor range object
+ * @returns {Array} The expanded array of keys
+ */
 const expand = (range) => {
-	const expanded = [];
-	if (range.length > 0 && range.from === void 0 && range.to === void 0) {
-		range.from = 0;
-		range.to = range.length - 1;
-		delete range.length;
+	const { length } = range;
+	let { from, to } = range;
+	if (length > 0 && from === void 0 && to === void 0) {
+		from = 0;
+		to = length - 1;
 	}
-	if (range.length === void 0 && range.from !== void 0 && range.to !== void 0) {
-		for (let i = range.from; i <= range.to; i++) {
-			expanded.push(i);
-		}
+	if (from !== void 0 && to !== void 0) {
+		return Array(to - from + 1).fill().map((value, key) => {
+			return key + from;
+		});
 	} else {
-		throw new Error("Range object " + JSON.stringify(range) + " is invalid");
+		throw new Error(`Range object ${JSON.stringify(range)} is invalid`);
 	}
-	return expanded;
 };
 
+/**
+ * Normalizes a keys array, a single key or a Falcor range object to an array of keys
+ *
+ * @param {Array|Number|Object} keys - A keys array, a single key or a Falcor range object
+ * @returns {Array} The array of keys
+ */
+const normalize = (keys) => {
+	if (Array.isArray(keys)) {
+		return keys;
+	} else if (keys && typeof keys === "object") {
+		return expand(keys);
+	} else {
+		return [keys];
+	}
+};
+
+/**
+ * Builds an empty tree from a normalized Falcor path
+ *
+ * @param {Array} path - A normalized Falcor path
+ * @returns {Object} The tree
+ */
 const build = (path) => {
 	const object = {};
 	if (path.length) {
-		let keys = path.shift();
-		if (!Array.isArray(keys)) {
-			if (keys && typeof keys === "object") {
-				keys = expand(keys);
-			} else {
-				keys = [keys];
-			}
-		}
-		keys.forEach((key) => {
-			const value = Extend({}, build(Array.from(path)));
+		normalize(path[0]).forEach((key) => {
+			const value = Extend(build(path.slice(1)));
 			object[key] = Object.keys(value).length ? value : null;
 		});
 	}
 	return object;
 };
 
+/**
+ * Creates an empty tree from normalized Falcor paths
+ *
+ * @export
+ * @param {Array} paths - An array of normalized Falcor paths
+ * @returns {Object} The tree
+ */
 export default (paths) => {
 	const data = {};
 	paths.forEach((path) => {
-		Object.entries(build(Array.from(path))).forEach(([key, value]) => {
+		Object.entries(build(path)).forEach(([key, value]) => {
 			data[key] = Extend(data[key], value);
 		});
 	});
