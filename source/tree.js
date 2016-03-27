@@ -45,7 +45,7 @@ const normalize = (keys) => {
  * @returns {Object} The tree
  */
 const build = (path) => {
-	const value = path.length && Extend(build(path.slice(1)));
+	const value = path.length && build(path.slice(1));
 	return normalize(path[0] || []).reduce((object, key) => {
 		return {
 			...object,
