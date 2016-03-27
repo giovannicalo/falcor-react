@@ -10,7 +10,6 @@
 	"dependencies": {
 		"babel-cli": "^6.6.5",
 		"babel-preset-node-giovanni": "^1.1.0",
-		"babel-runtime": "^6.6.1",
 		"falcor": "^0.1.16",
 		"falcor-graph-syntax": "^1.1.2",
 		"falcor-path-syntax": "^0.2.4",
@@ -18,10 +17,11 @@
 	},
 	"description": "Falcor integration for React",
 	"devDependencies": {
-		"babel-eslint": "^6.0.0-beta.6",
+		"babel-eslint": "^6.0.0",
+		"babel-register": "^6.7.2",
 		"chai": "^3.5.0",
 		"chai-as-promised": "^5.3.0",
-		"coveralls": "^2.11.8",
+		"coveralls": "^2.11.9",
 		"eslint": "^2.5.1",
 		"eslint-config-giovanni": "^1.1.1",
 		"falcor-router": "^0.4.0",
