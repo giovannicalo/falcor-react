@@ -4,15 +4,8 @@
 
 ## Installation
 
-This library is still missing some core features, therefore it hasn't been published on NPM yet.
-
-You can however manually clone the repository in your `node_modules` folder and install it.
-
 ```
-cd node_modules
-git clone https://github.com/giovannicalo/falcor-react.git
-cd falcor-react
-npm install
+npm install falcor-react
 ```
 
 ## Usage
