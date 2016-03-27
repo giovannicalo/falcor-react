@@ -1,6 +1,6 @@
 module.exports = {
 	extends: [
-		"../.eslintrc.js",
-		"giovanni/test"
+		"giovanni/test",
+		"../.eslintrc.js"
 	]
 };
