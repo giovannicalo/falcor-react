@@ -16,7 +16,7 @@
 		"falcor-path-syntax": "^0.2.4",
 		"react": "^0.14.7"
 	},
-	"description": "",
+	"description": "Falcor integration for React",
 	"devDependencies": {
 		"babel-eslint": "^6.0.0-beta.6",
 		"chai": "^3.5.0",
@@ -34,7 +34,7 @@
 		"rx": "^4.1.0"
 	},
 	"homepage": "https://github.com/giovannicalo/falcor-react",
-	"keywords": [],
+	"keywords": ["falcor", "react"],
 	"license": "MIT",
 	"main": "dist/index.js",
 	"name": "falcor-react",
