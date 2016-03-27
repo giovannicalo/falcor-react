@@ -6,8 +6,16 @@ import Tree from "./tree";
 
 const defaultConfig = { defineEmpty: false, propsSafety: 1 };
 
-export default function(query, config) {
-	config = Extend({}, defaultConfig, config);
+/**
+ * Wraps a React component, passing down Falcor data and logic as props
+ *
+ * @export
+ * @param {Array|String|function} query - A Falcor query to be executed before initializing the component
+ * @param {Object} config - A configuration object
+ * @returns {function} The wrapped component
+ */
+export default (query, config) => {
+	const finalConfig = Extend(defaultConfig, config);
 	return function(component) {
 		const Component = component;
 		return class FalcorLeaf extends React.Component {
@@ -28,27 +36,27 @@ export default function(query, config) {
 			}
 
 			call(functionPath, args, refSuffixes, thisPaths) {
-				return this.context.model.call(functionPath, args || [], refSuffixes || [], thisPaths || []);
+				return this.context.model.call(functionPath, args || [], refSuffixes || [], thisPaths || []); // eslint-disable-line prefer-reflect
 			}
 
 			get childProps() {
-				const props = Extend({}, this.parentProps, {
+				const props = Extend(this.parentProps, {
 					falcor: {
 						call: ::this.call,
-						config,
+						config: finalConfig,
 						data: this.state,
 						get: ::this.get,
 						reinitialize: ::this.initialize,
 						set: ::this.set
 					}
 				});
-				if (config.propsSafety < 2) {
+				if (finalConfig.propsSafety < 2) {
 					["call", "data", "get", "reinitialize", "set"].forEach((key) => {
 						props[key] = props.falcor[key];
-						delete props.falcor[key];
+						Reflect.deleteProperty(props.falcor, key);
 					});
-					if (config.propsSafety < 1) {
-						delete props.data;
+					if (finalConfig.propsSafety < 1) {
+						Reflect.deleteProperty(props, "data");
 						Object.entries(this.state).forEach(([key, value]) => {
 							props[key] = value;
 						});
@@ -69,7 +77,7 @@ export default function(query, config) {
 				this.initialize(props);
 			}
 
-			static displayName = "Falcor Leaf (" + (component.displayName || component.name || "Anonymous Component") + ")"
+			static displayName = `Falcor Leaf (${component.displayName || component.name || "Anonymous Component"})`
 
 			get(...pathSets) {
 				return this.context.model.get(...pathSets);
@@ -80,7 +88,7 @@ export default function(query, config) {
 					const pathSets = this.buildQuery(props);
 					if (pathSets) {
 						let state = null;
-						if (config.defineEmpty) {
+						if (finalConfig.defineEmpty) {
 							state = Tree(pathSets);
 						}
 						const data = await this.get(...pathSets);
@@ -101,7 +109,7 @@ export default function(query, config) {
 			}
 
 			get parentProps() {
-				const props = Extend({}, this.props);
+				const props = Extend(this.props);
 				if (this.parentConfig) {
 					let object = null;
 					if (this.parentConfig.propsSafety > 1) {
@@ -116,7 +124,7 @@ export default function(query, config) {
 					}
 					["call", "get", "reinitialize", "set"].forEach((key) => {
 						if (object) {
-							delete object[key];
+							Reflect.deleteProperty(object, key);
 						}
 					});
 				}
@@ -133,4 +141,5 @@ export default function(query, config) {
 
 		};
 	};
-}
+};
+
