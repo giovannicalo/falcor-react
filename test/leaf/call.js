@@ -12,7 +12,7 @@ export default class LeafCall extends React.Component {
 
 	async onClick() {
 		try {
-			const data = await this.props.call("foo.foo", ["foo"]);
+			const data = await this.props.call("foo.foo", ["foo"]); // eslint-disable-line prefer-reflect
 			if (data) {
 				this.setState({ foo: data.json.bar[4].foo });
 			}
