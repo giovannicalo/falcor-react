@@ -1,5 +1,9 @@
 {
 	"dependencies": {
-		"unused-ignores": []
+		"unused-ignores": [
+			"babel-cli",
+			"babel-preset-node-giovanni",
+			"babel-runtime"
+		]
 	}
 }
