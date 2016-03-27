@@ -16,7 +16,7 @@ const defaultConfig = { defineEmpty: false, propsSafety: 1 };
  */
 export default (query, config) => {
 	const finalConfig = Extend(defaultConfig, config);
-	return function(component) {
+	return (component) => {
 		const Component = component;
 		return class FalcorLeaf extends React.Component {
 
