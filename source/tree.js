@@ -45,14 +45,13 @@ const normalize = (keys) => {
  * @returns {Object} The tree
  */
 const build = (path) => {
-	const object = {};
-	if (path.length) {
-		normalize(path[0]).forEach((key) => {
-			const value = Extend(build(path.slice(1)));
-			object[key] = Object.keys(value).length ? value : null;
-		});
-	}
-	return object;
+	const value = path.length && Extend(build(path.slice(1)));
+	return normalize(path[0] || []).reduce((object, key) => {
+		return {
+			...object,
+			[key]: Object.keys(value).length ? value : null
+		};
+	}, {});
 };
 
 /**
