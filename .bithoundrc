@@ -1,9 +1,0 @@
-{
-	"dependencies": {
-		"unused-ignores": [
-			"babel-cli",
-			"babel-preset-node-giovanni",
-			"react"
-		]
-	}
-}
