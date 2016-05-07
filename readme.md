@@ -4,7 +4,7 @@
 
 ## Installation
 
-```
+```bash
 npm install falcor-react
 ```
 
@@ -14,7 +14,7 @@ npm install falcor-react
 
 In order to use Falcor in your components, you must decorate the root component of your application (or anyway one that contains all those where you want to use Falcor) with the `Root` decorator.
 
-```
+```javascript
 import FalcorReact from "falcor-react";
 ...
 @FalcorReact.Root(model)
@@ -29,7 +29,7 @@ The `Root` decorator takes exactly one argument, an object, that will be passed 
 
 Each component where you intend to use Falcor must be decorated with the `Leaf` decorator.
 
-```
+```javascript
 import FalcorReact from "falcor-react";
 ...
 @FalcorReact.Leaf(query)
@@ -42,19 +42,19 @@ The `Leaf` decorator takes two arguments, both optional.
 
 The first is an initialization query and it must be either a string...
 
-```
+```javascript
 @FalcorReact.Leaf("foo { bar }")
 ```
 
 ... or an array...
 
-```
+```javascript
 @FalcorReact.Leaf(["foo", "bar"])
 ```
 
 ... or a function taking the component's props as a parameter and returning either a string or an array.
 
-```
+```javascript
 @FalcorReact.Leaf((props) => {
 	return `foo(id: ${props.id}) { bar { foo } }`;
 })
@@ -62,13 +62,13 @@ The first is an initialization query and it must be either a string...
 
 You can also initialize a component without a query...
 
-```
+```javascript
 @FalcorReact.Leaf()
 ```
 
 ... and nest queries (e.g. if you need to retrieve data in multiple steps).
 
-```
+```javascript
 @FalcorReact.Leaf("foo { bar }")
 @FalcorReact.Leaf((props) => {
 	return `bar(id: ${props.data.foo.bar}) { foo }`;
@@ -100,25 +100,25 @@ It currently supports two options:
 The following syntaxes are supported out of the box as query languages and allow for either one or multiple paths to be requested.
 
 * [Graph](https://github.com/giovannicalo/falcor-graph-syntax)
-```
+```javascript
 "foo { bar(id: 1) { foo } }"
 ```
-```
+```javascript
 "foo { bar(id: 1) { foo } }, bar(index: 0) { foo }"
 ```
 
 * [Path](https://github.com/Netflix/falcor-path-syntax)
-```
+```javascript
 "foo.bar[1].foo"
 ```
-```
+```javascript
 ["foo.bar[1].foo", "bar[0].foo"]
 ```
 
 * Array
-```
+```javascript
 ["foo", "bar", 1, "foo"]
 ```
-```
+```javascript
 [["foo", "bar", 1, "foo"], ["bar", 0, "foo"]]
 ```
