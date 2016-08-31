@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropTypes } from "react";
 
 import ArraySyntax from "./array-syntax";
 import Extend from "./extend";
@@ -19,6 +19,10 @@ export default (query, config) => {
 	return (component) => {
 		const Component = component;
 		return class FalcorLeaf extends React.Component {
+
+			static propTypes = {
+				falcor: PropTypes.object
+			}
 
 			constructor(props) {
 				super(props);

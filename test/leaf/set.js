@@ -1,9 +1,13 @@
-import React from "react";
+import React, { PropTypes } from "react";
 
 import FalcorReact from "../../source";
 
 @FalcorReact.Leaf()
 export default class LeafSet extends React.Component {
+
+	static propTypes = {
+		set: PropTypes.func.isRequired
+	}
 
 	constructor(props) {
 		super(props);
