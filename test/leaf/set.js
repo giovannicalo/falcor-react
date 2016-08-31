@@ -6,7 +6,7 @@ import FalcorReact from "../../source";
 export default class LeafSet extends React.Component {
 
 	static propTypes = {
-		set: PropTypes.func.isRequired
+		set: PropTypes.func
 	}
 
 	constructor(props) {

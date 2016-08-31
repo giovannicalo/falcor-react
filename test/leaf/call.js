@@ -6,7 +6,7 @@ import FalcorReact from "../../source";
 export default class LeafCall extends React.Component {
 
 	static propTypes = {
-		call: PropTypes.func.isRequired
+		call: PropTypes.func
 	}
 
 	constructor(props) {
