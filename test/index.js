@@ -107,16 +107,12 @@ describe("Falcor", () => {
 				});
 			});
 			describe("Reinitialization", () => {
-				it("should reinitialize a component with data retrieved from a model after receiving new properties", async(done) => {
-					try {
-						await FindLeaf(tree, "Root").setState({ foo: "foo" });
-						setTimeout(() => {
-							expect(FindLeaf(tree, "LeafWithProps").props.data.foo.bar[0].foo).to.equal("bar");
-							done();
-						});
-					} catch (error) {
-						done(error);
-					}
+				it("should reinitialize a component with data retrieved from a model after receiving new properties", (done) => {
+					FindLeaf(tree, "Root").setState({ foo: "foo" });
+					setTimeout(() => {
+						expect(FindLeaf(tree, "LeafWithProps").props.data.foo.bar[0].foo).to.equal("bar");
+						done();
+					});
 				});
 			});
 			describe("Error", () => {
