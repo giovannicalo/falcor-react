@@ -1,4 +1,4 @@
-import Chai from "chai";
+import Chai, { expect } from "chai";
 import ChaiAsPromised from "chai-as-promised";
 import Jsdom from "jsdom";
 import React from "react";
@@ -12,8 +12,6 @@ import Tree from "../source/tree";
 
 Chai.config.showDiff = true;
 Chai.use(ChaiAsPromised);
-
-const expect = Chai.expect;
 
 global.document = Jsdom.jsdom();
 global.window = global.document.defaultView;
