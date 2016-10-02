@@ -136,6 +136,10 @@ export default (query, config) => {
 			}
 
 			render() {
+				const query = this.buildQuery();
+				if (finalConfig.defineEmpty && query && query.length && !Object.keys(this.state).length) {
+					return null;
+				}
 				return <Component {...this.childProps} />;
 			}
 
