@@ -113,11 +113,6 @@ describe("Falcor", () => {
 					});
 				});
 			});
-			describe("Error", () => {
-				it("should try to initialize a component with data retrieved from a model and throw an error", async() => {
-					return expect(FindLeaf(tree, "LeafError").props.reinitialize()).to.be.rejectedWith(Error, "unquoted indexers must be numeric. -- foo[bar");
-				});
-			});
 		});
 		describe("Falcor methods", () => {
 			it("should perform a call on the model", (done) => {
