@@ -136,7 +136,7 @@ export default (query, config) => {
 			}
 
 			render() {
-				const query = this.buildQuery();
+				const query = this.buildQuery(this.props); // FIXME: This will break if given an invalid query
 				if (finalConfig.defineEmpty && query && query.length && !Object.keys(this.state).length) {
 					return null;
 				}
